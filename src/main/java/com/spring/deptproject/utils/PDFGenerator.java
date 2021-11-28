@@ -11,10 +11,12 @@ import org.springframework.stereotype.Component;
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.layout.border.Border;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.IBlockElement;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.property.TextAlignment;
 import com.spring.deptproject.entities.StudentDetail;
 
 @Component
@@ -33,7 +35,8 @@ public class PDFGenerator {
 		document.add(generateTable(studentDetail));
 		ImageData data = ImageDataFactory.create(image, null);
 		com.itextpdf.layout.element.Image image2 = new com.itextpdf.layout.element.Image(data);
-		Paragraph paragraph = new Paragraph("QR Code");
+		Paragraph paragraph = new Paragraph();
+//		paragraph.add("QR Code");
 		paragraph.add(image2);
 		document.add(paragraph);
 		document.close();
@@ -43,11 +46,10 @@ public class PDFGenerator {
 		float[] pointColumnWidths = {200F, 200F}; 
 		Table table = new Table(pointColumnWidths);
 		
-		Cell cell = new Cell();
+//		Cell cell = new Cell();
 		
-		cell.add("Student Detail");
-		table.addCell(cell);
-		
+		table.addCell("Student Detail");
+		table.addCell("");
 		
 		table.addCell("FirstName: ");
 		table.addCell(studentDetail.getFirstName());
@@ -55,18 +57,16 @@ public class PDFGenerator {
 		table.addCell("LastName");
 		table.addCell(studentDetail.getLastName());
 		
-		cell.add("Examination Detail");
-		table.addCell(cell);
+		table.addCell("Examination Detail").setTextAlignment(TextAlignment.CENTER);
+		table.addCell("").setBorder(Border.NO_BORDER);
 		
 		table.addCell("Level");
 		table.addCell(studentDetail.getLevel());
 		
-		cell.add("Courses Registered");
-		table.addCell(cell);
+		table.addCell("Courses Registered");
+		table.addCell("");
 		
-//		table.addCell("Courses");
-//		table.addCell(studentDetail.getCourses());
-		
+				
 //		Map<String, Object> courseMap = new HashMap<String, Object>();
 		Map<String,Object> tempCourseMap = (Map<String, Object>) studentDetail.getCourses();
 		for (Entry<String, Object> entry : tempCourseMap.entrySet()) {
@@ -74,11 +74,7 @@ public class PDFGenerator {
 			table.addCell(entry.getValue().toString());
 //			courseMap.put(entry.getKey(), entry.getValue());
 		}
-		
-//		cell.add("QR Code");
-//		cell.add((IBlockElement) image);
-//		table.addCell(cell);
-		
+				
 		return table;
 	}
 }

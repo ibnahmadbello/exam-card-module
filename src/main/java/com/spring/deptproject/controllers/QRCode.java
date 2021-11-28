@@ -57,7 +57,7 @@ public class QRCode {
 		studentDetail.setCourses(courseMap);
 		String barcodeRequest = studentDetail.toString();
 		Image image = generateQRCodeImage(barcodeRequest);
-		pdfGenerator.generateItinerary(studentDetail, "/home/regent/Portfolio/test.pdf", image);
+		pdfGenerator.generateItinerary(studentDetail, "/home/regent/Portfolio/test4.pdf", image);
 		return new ResponseEntity<BufferedImage>(generateQRCodeImage(barcodeRequest), HttpStatus.OK);
 	}
 	
