@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,8 @@ public class QRCode {
 	
 	@Autowired
 	PDFGenerator pdfGenerator;
+	
+	private String FILE_DIR = "/home/regent/Portfolio/";
 	
 	public static BufferedImage generateQRCodeImage(String barcodeText) throws Exception{
 		QRCodeWriter barcodeWriter = new QRCodeWriter();
@@ -56,8 +59,9 @@ public class QRCode {
 		}
 		studentDetail.setCourses(courseMap);
 		String barcodeRequest = studentDetail.toString();
+		String filePath = FILE_DIR+map.get("firstName")+".pdf";
 		Image image = generateQRCodeImage(barcodeRequest);
-		pdfGenerator.generateItinerary(studentDetail, "/home/regent/Portfolio/test4.pdf", image);
+		pdfGenerator.generateItinerary(studentDetail, filePath, image);
 		return new ResponseEntity<BufferedImage>(generateQRCodeImage(barcodeRequest), HttpStatus.OK);
 	}
 	
