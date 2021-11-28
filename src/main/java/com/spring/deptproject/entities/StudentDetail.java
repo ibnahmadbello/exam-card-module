@@ -7,7 +7,7 @@ public class StudentDetail {
 	private String firstName;
 	private String lastName;
 	private String level;
-	private Set<Map<String, String>> courses;
+	private Map<String, Object> courses;
 	public String getFirstName() {
 		return firstName;
 	}
@@ -26,10 +26,10 @@ public class StudentDetail {
 	public void setLevel(String level) {
 		this.level = level;
 	}
-	public Set<Map<String, String>> getCourses() {
+	public Map<String, Object> getCourses() {
 		return courses;
 	}
-	public void setCourses(Set<Map<String, String>> courses) {
+	public void setCourses(Map<String, Object> courses) {
 		this.courses = courses;
 	}
 	@Override
