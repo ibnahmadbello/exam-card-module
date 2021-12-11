@@ -6,6 +6,7 @@ import java.util.Set;
 public class StudentDetail {
 	private String firstName;
 	private String lastName;
+	private String registrationNumber;
 	private String level;
 	private Map<String, Object> courses;
 	public String getFirstName() {
@@ -31,6 +32,12 @@ public class StudentDetail {
 	}
 	public void setCourses(Map<String, Object> courses) {
 		this.courses = courses;
+	}
+	public String getRegistrationNumber() {
+		return registrationNumber;
+	}
+	public void setRegistrationNumber(String registrationNumber) {
+		this.registrationNumber = registrationNumber;
 	}
 	@Override
 	public String toString() {
