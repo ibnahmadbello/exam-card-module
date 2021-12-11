@@ -57,6 +57,9 @@ public class PDFGenerator {
 		table.addCell("LastName");
 		table.addCell(studentDetail.getLastName());
 		
+		table.addCell("Registration Number");
+		table.addCell(studentDetail.getRegistrationNumber());
+		
 		table.addCell("Examination Detail").setTextAlignment(TextAlignment.CENTER);
 		table.addCell("").setBorder(Border.NO_BORDER);
 		

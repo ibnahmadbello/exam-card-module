@@ -51,6 +51,7 @@ public class QRCode {
 		StudentDetail studentDetail = new StudentDetail();
 		studentDetail.setLastName((String) map.get("lastName"));
 		studentDetail.setFirstName((String)map.get("firstName"));
+		studentDetail.setRegistrationNumber((String)map.get("registrationNumber"));
 		studentDetail.setLevel((String) map.get("level"));
 		Map<String, Object> courseMap = new HashMap<String, Object>();
 		Map<String,Object> tempCourseMap = (Map<String, Object>) map.get("courses");
