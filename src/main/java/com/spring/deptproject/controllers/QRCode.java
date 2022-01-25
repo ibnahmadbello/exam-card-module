@@ -2,7 +2,6 @@ package com.spring.deptproject.controllers;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -26,7 +25,7 @@ import com.spring.deptproject.entities.StudentDetail;
 import com.spring.deptproject.utils.PDFGenerator;
 
 @RestController
-@RequestMapping("/barcodes")
+@RequestMapping("/api")
 public class QRCode {
 	
 	@Autowired
@@ -39,15 +38,9 @@ public class QRCode {
 		BitMatrix bitMatrix = barcodeWriter.encode(barcodeText, BarcodeFormat.QR_CODE, 200, 200);
 		return MatrixToImageWriter.toBufferedImage(bitMatrix);		
 	}
-	
-	@PostMapping(value="/zxing/qrcode", produces=MediaType.IMAGE_PNG_VALUE)
-	public ResponseEntity<BufferedImage> zxingQRCode(@RequestBody String barcode) throws Exception{
-//		return okResponse(generateQRCodeImage(barcode));
-		return new ResponseEntity<BufferedImage>(generateQRCodeImage(barcode), HttpStatus.OK);
-	}
-	
+		
 	@SuppressWarnings("unchecked")
-	@PostMapping(value="/zxing/qrcode/json", produces=MediaType.IMAGE_PNG_VALUE)
+	@PostMapping(value="/qrcode/json", produces=MediaType.IMAGE_PNG_VALUE)
 	public ResponseEntity<BufferedImage> jsonrequestQRCode(@RequestBody Map<String, Object> map) throws Exception{
 		StudentDetail studentDetail = new StudentDetail();
 		studentDetail.setLastName((String) map.get("lastName"));
@@ -65,10 +58,5 @@ public class QRCode {
 		Image image = generateQRCodeImage(barcodeRequest);
 		pdfGenerator.generateItinerary(studentDetail, filePath, image);
 		return new ResponseEntity<BufferedImage>(generateQRCodeImage(barcodeRequest), HttpStatus.OK);
-	}
-	
-	
-	private ResponseEntity<BufferedImage> okResponse(BufferedImage image){
-		return new ResponseEntity<BufferedImage>(image, HttpStatus.OK);
 	}
 }
