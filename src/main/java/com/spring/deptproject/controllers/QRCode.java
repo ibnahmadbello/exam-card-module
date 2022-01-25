@@ -46,6 +46,7 @@ public class QRCode {
 		return new ResponseEntity<BufferedImage>(generateQRCodeImage(barcode), HttpStatus.OK);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@PostMapping(value="/zxing/qrcode/json", produces=MediaType.IMAGE_PNG_VALUE)
 	public ResponseEntity<BufferedImage> jsonrequestQRCode(@RequestBody Map<String, Object> map) throws Exception{
 		StudentDetail studentDetail = new StudentDetail();
